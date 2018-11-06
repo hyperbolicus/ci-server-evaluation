@@ -21,4 +21,9 @@ init_buildbot:
       - /opt/buildbot
     - require:
       - buildbot
- 
+
+start_buildbot:
+  cmd.run:
+    - name: 'buildbot-worker start /opt/buildbot'
+    - require:
+      - init_buildbot

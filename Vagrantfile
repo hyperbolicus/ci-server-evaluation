@@ -10,8 +10,8 @@ master = {
   :ram => 1024
 }
 nodes = [
-  { :hostname => "minion1", :cpu => 1, :cpuexecution => 50, :ram => 1024 },
-  { :hostname => "minion2", :cpu => 1, :cpuexecution => 50, :ram => 1024 }
+  { :hostname => "minion1", :cpu => 1, :cpuexecution => 50, :ram => 1024 }#,
+  #{ :hostname => "minion2", :cpu => 1, :cpuexecution => 50, :ram => 1024 }
 ]
 
 Vagrant.configure("2") do |config|
