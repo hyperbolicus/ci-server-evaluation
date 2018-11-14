@@ -28,9 +28,3 @@ Deploying configuration:
     - source: salt://files/master.cfg
     - require:
       - init_buildbot
-
-Start Buildbot:
-  cmd.run:
-    - name: 'buildbot start /opt/buildbot'
-    - require:
-      - Deploying configuration

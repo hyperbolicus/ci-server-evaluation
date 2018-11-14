@@ -10,8 +10,9 @@ master = {
   :ram => 1024
 }
 nodes = [
-  { :hostname => "minion1", :cpu => 1, :cpuexecution => 50, :ram => 1024 }#,
-  #{ :hostname => "minion2", :cpu => 1, :cpuexecution => 50, :ram => 1024 }
+  { :hostname => "minion1", :cpu => 1, :cpuexecution => 50, :ram => 1024 },
+  { :hostname => "minion2", :cpu => 1, :cpuexecution => 50, :ram => 1024 },
+  { :hostname => "database", :cpu => 1, :cpuexecution => 50, :ram => 1024 }
 ]
 
 Vagrant.configure("2") do |config|
@@ -22,14 +23,16 @@ Vagrant.configure("2") do |config|
     subconfig.vm.network "private_network", ip: IP_BLOCK + "10"
     subconfig.vm.network "forwarded_port", guest: 8010, host: 8010
     subconfig.vm.synced_folder "salt/root", "/srv/salt", type: :rsync
+    subconfig.vm.synced_folder "salt/pillar", "/srv/pillar", type: :rsync
 
     subconfig.vm.provision :salt do |salt|
       salt.install_master = true
-      salt.master_json_config = '{"interface":"'+IP_BLOCK + "10" +'","master_id":"master"}'
+      salt.master_json_config = '{"interface":"'+ IP_BLOCK + "10" +'","master_id":"master"}'
       salt.master_key = "salt/key/master.pem"
       salt.master_pub = "salt/key/master.pub"
       salt.seed_master = {
         :minion1 => "salt/key/minion1.pub",
+        :minion2 => "salt/key/minion2.pub",
         :minion0 => "salt/key/minion0.pub",
         :master => "salt/key/master.pub"
       }

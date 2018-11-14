@@ -1,9 +1,10 @@
 # -*- mode: yaml -*-
 base:
-  '*':
-    - htop
   'master*':
     - buildbot_master
-  'minion*':
+    - concourse.master
+  'minion[0-1]':
     - buildbot_worker
+  'minion2':
+    - postgres
 
