@@ -1,0 +1,9 @@
+[Unit]
+Description=Concourse CI Server
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/concourse_start.sh
+
+[Install]
+WantedBy=multi-user.target

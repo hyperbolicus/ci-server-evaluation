@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-IP_BLOCK="172.16.66."
+IP_BLOCK="172.18.1."
 
 master = {
   :hostname => "master",
@@ -22,6 +22,7 @@ Vagrant.configure("2") do |config|
     subconfig.vm.hostname = master[:hostname]
     subconfig.vm.network "private_network", ip: IP_BLOCK + "10"
     subconfig.vm.network "forwarded_port", guest: 8010, host: 8010
+    subconfig.vm.network "forwarded_port", guest: 8080, host: 8080
     subconfig.vm.synced_folder "salt/root", "/srv/salt", type: :rsync
     subconfig.vm.synced_folder "salt/pillar", "/srv/pillar", type: :rsync
 
